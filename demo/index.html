@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="da" style="font-size: 100%" class=".leaflet-touch">
+<head>
+	<title>fcoo.dk - leaflet-control-boxmenu - Example</title>
+	<meta charset="iso-8859-1" />
+	<meta charset="iso-8859-1" /> <!-- OR "utf-8" -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv='x-dns-prefetch-control' content='on'><!-- Hvorfor "on"? -->
+
+<!-- <meta http-equiv="refresh" content="30"> -->
+<!-- <meta name='description' content='150 words'> -->
+<!-- <meta name='subject' content='your website's subject'> -->
+<!-- <meta http-equiv='Expires' content='0'> -->
+	<meta name='copyright' content='FCOO'>
+	<meta name='owner' content='FCOO'>
+
+  <link  href="bower_components.css" rel="stylesheet">	
+  <link  href="css/font-awesome.css" rel="stylesheet">	
+  <link  href="../src/leaflet-control-boxmenu.css" rel="stylesheet">	
+	<style>
+   html, body, #map {
+      height:100%;
+      width:100%;
+      padding:0px;
+      margin:0px;
+   } 
+
+</style>
+</head>
+
+<body>
+	<div id="map" _style="width: 600px; height: 400px"></div>
+
+	<script src="touch-emulator.js"></script>
+	<script>
+	//TouchEmulator(); 
+	</script>
+	<script src="bower_components.js"></script>
+
+	<script src="../src/leaflet-control-boxmenu.js"></script>
+	<script>
+		function isSmallScreen(){ return (window.innerWidth < 600); }
+		function isBigScreen(){ return (window.innerWidth >= 600); }
+		function myOnClick(){};
+		var map = L.map('map', {zoomControl: false }).setView([56.2, 11.5], 9);
+		var layer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'openstreetmap'}).addTo(map);
+
+		var cb = new L.Control.Box({
+			position: 'topleft',
+			icon: 'bars',
+			width: 300,
+			height: 'auto',
+			singleBoxMode: true,
+			open: false,
+			scrollY: true,
+			pinable: isBigScreen,
+			updateOnResize: true,
+			noMargin: isSmallScreen
+
+		}).addTo(map);
+
+	for (var i=0; i<20; i++ ){
+			cb.$contentContainer.append(i+'<br>');		
+	}
+	
+		//Create Zoom-control
+		var zoomControl = new L.Control.Zoom({
+			position: 'topright'
+		});
+		map.addControl(zoomControl);
+
+
+		var cb = new L.Control.Box({
+			position: 'topcenter',
+			width: 180,
+			height: 'auto',
+			header: 'Information',
+			hiddenWhenClosed: true,
+			noMargin: true,
+			open: true,
+			icon: 'info',
+		}).addTo(map);
+		cb.$contentContainer.html('This box disapear when closed<br>This is just another line');
+
+		var cb = new L.Control.Box({
+			position: 'topcenter',
+			width: 280,
+			height: 50,
+			icon: 'map-o',
+			extendable: isBigScreen, 
+			updateOnResize: true,
+		}).addTo(map);
+		cb.$contentContainer.css('border','1px solid black');
+		var cc2 = cb.addContentsContainer({width: 400, height:99, onlyExtended:true});
+		cc2.css('border','1px solid black').text('only extended');
+		var cc3 = cb.addContentsContainer({width: 300, height:99, neverExtended:true});
+		cc3.css('border','1px solid black').text('never extended');
+		
+		new L.Control.Box({
+			position: 'topright',
+			width: 180,
+			height: 120,
+			icon: 'list-ul',
+			pinable: true,
+			open: true,
+			onOpen: function(){console.log('OPEN CLOCK'); }
+		}).addTo(map);
+
+
+		var cb = 
+			new L.Control.Box({
+				position: 'bottomleft',
+				icon: 'map-marker', 
+				width: 300,
+				height: 200,
+			});
+			cb.addTo(map);
+
+			var container2 = cb.addContentsContainer({height:120});
+
+			var myButtons = [
+						{icon:'map-marker',	hoverColor: 'green',													onClick:myOnClick},
+						{icon:'calculator',																								onClick:myOnClick},
+						{icon:'map-o',																										onClick:myOnClick},
+						{icon:'ban',				hoverColor: 'red',		separatorBefore: true,	onClick:myOnClick},
+						{icon:'ban',															disabled:true,					onClick:myOnClick},
+						{icon:'folder-o',		selectedIcon: 'folder-open-o',								onClick:myOnClick},
+					],
+					bgList = [];
+
+			var bg = 
+				new L.Control.ButtonGroup({
+					radioGroup: true,
+					horizontal:true,
+					buttons: myButtons
+				});
+			container2.append( bg._container );
+
+		
+		new L.Control.Box({
+			position: 'bottomcenter',
+			icon: 'clock-o',
+			width: 400,
+			height: 150,
+			pinable: true,
+			open: true, 
+		}).addTo(map);
+
+		new L.Control.Box({
+			position: 'bottomright',
+			icon: 'cog',
+			width: 100,
+			height: 200,
+		}).addTo(map).addContentsContainer( {height:120} );
+
+
+		//Create Zoom-control
+		var zoomControl = new L.Control.Zoom({
+			position: 'topleft'
+		});
+		map.addControl(zoomControl);
+	</script>
+</body>
+</html>

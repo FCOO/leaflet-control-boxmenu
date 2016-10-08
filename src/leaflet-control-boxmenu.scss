@@ -1,0 +1,287 @@
+/***********************************************
+leaflet-control-boxmenu.scss, Create Leaflet Control in a box with optional icons and size-toggle
+
+	(c) 2015, FCOO
+
+	https://github.com/FCOO/leaflet-control-boxmenu
+	https://github.com/FCOO
+
+
+************************************************/
+//BOURBON - http://bourbon.io/
+@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
+
+$normal-bg-color		: #fff;
+$hover-bg-color			: darken( $normal-bg-color, 10% ); 
+$active-bg-color		: darken( $hover-bg-color,	16% ); 
+
+//Default leaflet control margin
+$leaflet-margin: 10px;
+
+//Copyed from src/leaflet-control-button-group.scss in github/fcoo/leaflet-control-button-group
+$leaflet-small-height-width	: 20px;
+$leaflet-height-width				: 26px;
+$leaflet-touch-height-width	: 30px;
+
+$leaflet-small-icon-font-size	: 13.75px;
+$leaflet-icon-font-size				: 16px;
+$leaflet-touch-icon-font-size	: 19px;
+
+
+$transition-time				: 200ms;
+$transition-mode				: ease-in-out; 
+
+
+.leaflet-control-container {
+	width	: 100%; 
+	height: 100%;
+
+	//Sizing of containers for flex-boxes to the left and right
+	> div.leaflet-left.leaflet-top, > div.leaflet-right.leaflet-top {
+		height: 100%;
+	}
+}
+
+
+/******************************************************
+CSS for boxes and control-containers when a box is pined
+and thereby outside the map
+*****************************************************/
+.leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu {
+	border-radius	: 0;
+	border				: none;
+	margin				: 0;
+	position			: absolute;
+	box-shadow		: none;
+	z-index				: 1;
+
+	&.pin-topleft, &.pin-topright { 
+		height				: 100% !important;
+		max-height		: 100% !important;
+	}
+
+	&.pin-topleft	{ 
+		border-right: 2px solid black; 
+		left				: 0;
+	}
+	&.pin-topright { 
+		border-left	: 2px solid black; 
+		right				: 0;	
+	}
+	&.pin-bottomcenter { 
+		width				: 100% !important;
+		max-width		: 100% !important;
+		border-top	: 2px solid black; 
+		left				: 0;
+		right				: 0;
+		bottom			: 0;	
+		z-index			: 2;
+	
+		.leaflet-control-boxmenu-header { 
+			max-width: 100% !important;
+		}
+	}
+}
+
+
+/******************************************************
+leaflet-control.leaflet-control-boxmenu
+*******************************************************/
+.leaflet-control.leaflet-control-boxmenu {
+
+	background-color: #fff;
+	
+	//no-margin => control-box placed on edge of screen
+	&.no-margin {
+		.leaflet-top &:first-child,		.leaflet-top &:first-child .leaflet-control-boxmenu-header		{ margin-top   : 0; border-top   : medium none; border-top-left-radius   : 0px;  border-top-right-radius   : 0px; }
+		.leaflet-bottom &:last-child, .leaflet-bottom &:last-child .leaflet-control-boxmenu-header	{ margin-bottom: 0; border-bottom: medium none; border-bottom-left-radius: 0px;  border-bottom-right-radius: 0px; }
+
+		.leaflet-left &, .leaflet-left & .leaflet-control-boxmenu-header		{ margin-left	: 0; border-left	: medium none; border-top-left-radius : 0px;  border-bottom-left-radius : 0px; }
+		.leaflet-right &, .leaflet-right & .leaflet-control-boxmenu-header	{ margin-right: 0; border-right	: medium none; border-top-right-radius: 0px;  border-bottom-right-radius: 0px; }
+	}
+	
+	
+	//Global class to hide elements
+	*.hidden { display: none !important; }
+
+	//***********************************************
+	//Header with icon. Same style as in fcoo/leaflet-popup-extentions. TODO: Make styles in fcoo/leaflet-popup-extentions as @mixin
+	.leaflet-control-boxmenu-header {
+
+		flex-grow		: 0;
+		flex-shrink	: 0;
+
+		box-sizing: border-box;
+		height		: $leaflet-small-height-width + 3px;
+		font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif; //same as .leaflet-container in leaflet.css
+		font-size	: $leaflet-small-icon-font-size;
+		.leaflet-touch & {
+			height		: $leaflet-height-width + 2px;
+			font-size	: $leaflet-icon-font-size;
+		}
+
+		width				: 100%;
+		max-width		: 0;
+
+		border-top		: 1px solid #e5e5e5; 
+		border-bottom	: 1px solid #e5e5e5; 
+		border-right	: none;
+		border-radius	: 4px;	
+		border-top-right-radius		: 0;
+		border-bottom-right-radius: 0;
+		
+		text-align		: left !important;
+		padding				: 0;
+		padding-left	: 4px; 
+
+		white-space		: nowrap; 
+    overflow			: hidden;
+		text-overflow	: ellipsis; 
+		& i {
+			height				: 100%;
+			padding-right	: 4px !important; 
+			cursor				: pointer;
+		}
+
+		//leaflet-control-button-group = div with top-right-corner buttons
+		.leaflet-control-button-group {
+			position: absolute;
+			top		: 0;
+			right	: 0;
+		}
+	} //end of .leaflet-control-boxmenu-header
+
+	//***********************************************
+	//leaflet-control-boxmenu-container = the div containing the contents of the box
+	.leaflet-control-boxmenu-container {
+		flex-grow				: 0;
+		flex-shrink			: 0;
+
+		width						: 100%;
+		max-width				: 100%;
+		background-color: transparent;
+		margin					: 0;
+		margin-left			: auto;
+		margin-right		: auto;
+		padding					: 4px;
+		opacity					: 1;
+
+		overflow				: hidden;
+		&.scroll, &.scroll-x { overflow-x: auto; }
+		&.scroll, &.scroll-y { overflow-y: auto; }
+	
+
+		//Sizing for the different options.heightBox
+		&.fixed {
+		}
+		&.auto {
+			flex-grow		: 1;
+			flex-shrink	: 1;
+		}
+	}
+	
+	
+	//Container only or never displayed when the box is extended
+	&:not(.extended) .leaflet-control-boxmenu-container.only-extended,
+	&.extended .leaflet-control-boxmenu-container.never-extended {
+		width			: 0 !important;
+		height		: 0 !important;
+		max-width	: 0 !important;
+		max-height: 0 !important;
+		padding		: 0 !important;
+		margin		: 0 !important;
+		border		: none !important;
+	}
+
+	/**********************************************
+	OPEN
+	**********************************************/
+	&.open {
+		display				: flex;
+		flex-direction: column; 
+		box-sizing: border-box;
+		
+		overflow				: hidden;
+	
+		//Animation on maximizing
+		@include transition-duration($transition-time);
+		@include transition-timing-function($transition-mode);
+	
+		//box-sizing and transition-duration for all children
+		*  { 
+			@include transition-duration($transition-time);
+			@include transition-timing-function($transition-mode);	
+		}
+
+		//Max-height
+		max-height	: calc(100% - 20px); //20px = 2*$leaflet-margin
+		&.no-margin { max-height: calc(100% - 10px); }//10px = 1*$leaflet-margin
+
+		//Header
+		.leaflet-control-boxmenu-header {
+			max-width: 10000;
+		}
+
+		//Hide control-button when open
+		& > a.leaflet-control-button { 
+			display: none; 
+		}
+	}
+	
+
+	/**********************************************
+	CLOSED
+	**********************************************/
+	&:not(.open){
+		max-width	: $leaflet-height-width !important;
+		max-height: $leaflet-height-width !important;
+
+		.leaflet-touch & {
+			max-width	: $leaflet-touch-height-width !important;
+			max-height: $leaflet-touch-height-width !important;
+		}
+
+		//Full hidden if class=hidden-when-closed
+		&.hidden-when-closed {
+			display: none !important;
+		}
+
+		//Hide header when closed
+		.leaflet-control-boxmenu-header {
+			width			: 0 !important;
+			height		: 0 !important;
+			max-width	: 0 !important;
+			max-height: 0 !important;
+			padding		: 0 !important;
+			margin		: 0 !important;
+			border		: none !important;
+
+			* { display: none;	}
+		}
+
+		.leaflet-control-boxmenu-container {
+			opacity		: 0;
+			width			: 0px !important; 
+			height		: 0px !important;
+
+			max-width	: 0px !important; 
+			max-height: 0px !important;
+
+		}
+	}
+
+	//*******************************************************************************
+	
+	
+	//Adjustments to leaflet-control-button-group when inside a leaflet-control-boxmenu
+	.leaflet-control-button-group {
+		display: inline-block;
+		box-shadow: none;
+//		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+
+		border: 1px solid #ccc;
+	}
+
+} //end of .leaflet-control.leaflet-control-boxmenu
+
+

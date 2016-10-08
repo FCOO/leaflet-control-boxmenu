@@ -1,0 +1,19 @@
+{
+  "name": "leaflet-control-boxmenu",
+  "version": "0.0.1",
+  "homepage": "https://github.com/FCOO/leaflet-control-boxmenu",
+  "author": "Niels Holt nho@fcoo.dk",
+  "description": "package.json is only use for building the package. see bower.json for more info",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FCOO/leaflet-control-boxmenu.git"
+  },
+  "dependencies": {
+    "grunt": "^0.4.0",
+    "grunt-fcoo-grunt-plugin": "^0.4.0"
+  },
+  "jshintConfig": {
+    "jshintrc": true
+  },
+  "license": "MIT"
+}

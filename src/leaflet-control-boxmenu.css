@@ -1,0 +1,193 @@
+/***********************************************
+leaflet-control-boxmenu.scss, Create Leaflet Control in a box with optional icons and size-toggle
+
+	(c) 2015, FCOO
+
+	https://github.com/FCOO/leaflet-control-boxmenu
+	https://github.com/FCOO
+
+
+************************************************/
+.leaflet-control-container {
+  width: 100%;
+  height: 100%; }
+  .leaflet-control-container > div.leaflet-left.leaflet-top, .leaflet-control-container > div.leaflet-right.leaflet-top {
+    height: 100%; }
+
+/******************************************************
+CSS for boxes and control-containers when a box is pined
+and thereby outside the map
+*****************************************************/
+.leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu {
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  position: absolute;
+  box-shadow: none;
+  z-index: 1; }
+  .leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu.pin-topleft, .leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu.pin-topright {
+    height: 100% !important;
+    max-height: 100% !important; }
+  .leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu.pin-topleft {
+    border-right: 2px solid black;
+    left: 0; }
+  .leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu.pin-topright {
+    border-left: 2px solid black;
+    right: 0; }
+  .leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu.pin-bottomcenter {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-top: 2px solid black;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2; }
+    .leaflet-outer-container > .leaflet-control.leaflet-control-boxmenu.pin-bottomcenter .leaflet-control-boxmenu-header {
+      max-width: 100% !important; }
+
+/******************************************************
+leaflet-control.leaflet-control-boxmenu
+*******************************************************/
+.leaflet-control.leaflet-control-boxmenu {
+  background-color: #fff;
+  /**********************************************
+	OPEN
+	**********************************************/
+  /**********************************************
+	CLOSED
+	**********************************************/ }
+  .leaflet-top .leaflet-control.leaflet-control-boxmenu.no-margin:first-child, .leaflet-top .leaflet-control.leaflet-control-boxmenu.no-margin:first-child .leaflet-control-boxmenu-header {
+    margin-top: 0;
+    border-top: medium none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px; }
+  .leaflet-bottom .leaflet-control.leaflet-control-boxmenu.no-margin:last-child, .leaflet-bottom .leaflet-control.leaflet-control-boxmenu.no-margin:last-child .leaflet-control-boxmenu-header {
+    margin-bottom: 0;
+    border-bottom: medium none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px; }
+  .leaflet-left .leaflet-control.leaflet-control-boxmenu.no-margin, .leaflet-left .leaflet-control.leaflet-control-boxmenu.no-margin .leaflet-control-boxmenu-header {
+    margin-left: 0;
+    border-left: medium none;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px; }
+  .leaflet-right .leaflet-control.leaflet-control-boxmenu.no-margin, .leaflet-right .leaflet-control.leaflet-control-boxmenu.no-margin .leaflet-control-boxmenu-header {
+    margin-right: 0;
+    border-right: medium none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px; }
+  .leaflet-control.leaflet-control-boxmenu *.hidden {
+    display: none !important; }
+  .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-header {
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    height: 23px;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 13.75px;
+    width: 100%;
+    max-width: 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    border-right: none;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    text-align: left !important;
+    padding: 0;
+    padding-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+    .leaflet-touch .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-header {
+      height: 28px;
+      font-size: 16px; }
+    .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-header i {
+      height: 100%;
+      padding-right: 4px !important;
+      cursor: pointer; }
+    .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-header .leaflet-control-button-group {
+      position: absolute;
+      top: 0;
+      right: 0; }
+  .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-container {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4px;
+    opacity: 1;
+    overflow: hidden; }
+    .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-container.scroll, .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-container.scroll-x {
+      overflow-x: auto; }
+    .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-container.scroll, .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-container.scroll-y {
+      overflow-y: auto; }
+    .leaflet-control.leaflet-control-boxmenu .leaflet-control-boxmenu-container.auto {
+      flex-grow: 1;
+      flex-shrink: 1; }
+  .leaflet-control.leaflet-control-boxmenu:not(.extended) .leaflet-control-boxmenu-container.only-extended,
+  .leaflet-control.leaflet-control-boxmenu.extended .leaflet-control-boxmenu-container.never-extended {
+    width: 0 !important;
+    height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important; }
+  .leaflet-control.leaflet-control-boxmenu.open {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-transition-duration: 200ms;
+    -moz-transition-duration: 200ms;
+    transition-duration: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    max-height: calc(100% - 20px); }
+    .leaflet-control.leaflet-control-boxmenu.open * {
+      -webkit-transition-duration: 200ms;
+      -moz-transition-duration: 200ms;
+      transition-duration: 200ms;
+      -webkit-transition-timing-function: ease-in-out;
+      -moz-transition-timing-function: ease-in-out;
+      transition-timing-function: ease-in-out; }
+    .leaflet-control.leaflet-control-boxmenu.open.no-margin {
+      max-height: calc(100% - 10px); }
+    .leaflet-control.leaflet-control-boxmenu.open .leaflet-control-boxmenu-header {
+      max-width: 10000; }
+    .leaflet-control.leaflet-control-boxmenu.open > a.leaflet-control-button {
+      display: none; }
+  .leaflet-control.leaflet-control-boxmenu:not(.open) {
+    max-width: 26px !important;
+    max-height: 26px !important; }
+    .leaflet-touch .leaflet-control.leaflet-control-boxmenu:not(.open) {
+      max-width: 30px !important;
+      max-height: 30px !important; }
+    .leaflet-control.leaflet-control-boxmenu:not(.open).hidden-when-closed {
+      display: none !important; }
+    .leaflet-control.leaflet-control-boxmenu:not(.open) .leaflet-control-boxmenu-header {
+      width: 0 !important;
+      height: 0 !important;
+      max-width: 0 !important;
+      max-height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important; }
+      .leaflet-control.leaflet-control-boxmenu:not(.open) .leaflet-control-boxmenu-header * {
+        display: none; }
+    .leaflet-control.leaflet-control-boxmenu:not(.open) .leaflet-control-boxmenu-container {
+      opacity: 0;
+      width: 0px !important;
+      height: 0px !important;
+      max-width: 0px !important;
+      max-height: 0px !important; }
+  .leaflet-control.leaflet-control-boxmenu .leaflet-control-button-group {
+    display: inline-block;
+    box-shadow: none;
+    border: 1px solid #ccc; }

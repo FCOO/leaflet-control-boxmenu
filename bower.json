@@ -1,0 +1,42 @@
+{
+  "name": "leaflet-control-boxmenu",
+  "version": "0.0.1",
+  "homepage": "https://github.com/FCOO/leaflet-control-boxmenu",
+  "authors": [
+    "Niels Holt nho@fcoo.dk"
+  ],
+  "description": "",
+  "main": [
+    "dist/leaflet-control-boxmenu.js",
+    "dist/leaflet-control-boxmenu.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FCOO/leaflet-control-boxmenu.git"
+  },
+  "dependencies": {
+    "leaflet": "latest",
+    "jquery": "latest",
+    "leaflet-control-topcenter": "fcoo/leaflet-control-topcenter#latest",
+    "leaflet-control-button-group": "fcoo/leaflet-control-button-group#latest",
+    "leaflet-freeze": "https://github.com/FCOO/leaflet-freeze.git#^1.1.4",
+    "hammerjs": "hammer.js#^2.0.8",
+    "leaflet-map-margin": "fcoo/leaflet-map-margin#^1.0.0"
+  },
+  "devDependencies": {
+    "bourbon": "latest",
+    "modernizr-mixin": "latest",
+    "mathsass": "latest"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "es6"
+  ]
+}
